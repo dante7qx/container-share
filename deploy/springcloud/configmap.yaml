@@ -4,7 +4,7 @@ metadata:
   name: ccb-springcloud-configmap
 data:
   server_port: "8080"
-  spring_profile_actives: springcloud
+  spring_profiles_active: springcloud
   eureka_user: dante
   eureka_pwd: "123456"
   eureka_host: eureka-external-server
