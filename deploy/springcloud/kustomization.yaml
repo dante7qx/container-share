@@ -10,7 +10,7 @@ commonAnnotations:
   k8sVersion: v1.14.3
   
 resources:
-- ccb-springcloud-configmap
+- configmap.yaml
 - api1-deployment.yaml
 - api1-service.yaml
 - api2-deployment.yaml
