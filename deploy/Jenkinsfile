@@ -18,16 +18,24 @@ node {
    stage('构建镜像') {
    		parallel {
    			stage('ccb-api1') {
-   				sh "docker build -t ccb-api1:v1 --build-arg pkgName=ccb-api1 --build-arg pkgVersion=1.0 ."
+                steps {
+   				    sh "docker build -t ccb-api1:v1 --build-arg pkgName=ccb-api1 --build-arg pkgVersion=1.0 ."
+                }
    			}
    			stage('ccb-api2') {
-   				sh "docker build -t ccb-api2:v1 --build-arg pkgName=ccb-api2 --build-arg pkgVersion=1.0 ."
+                steps {
+   				    sh "docker build -t ccb-api2:v1 --build-arg pkgName=ccb-api2 --build-arg pkgVersion=1.0 ."
+                }
    			}
    			stage('ccb-portal') {
-   				sh "docker build -t ccb-portal:v1 --build-arg pkgName=ccb-portal --build-arg pkgVersion=1.0 ."
+                steps {
+   				    sh "docker build -t ccb-portal:v1 --build-arg pkgName=ccb-portal --build-arg pkgVersion=1.0 ."
+                }
    			}
    			stage('ccb-gateway') {
-   				sh "docker build -t ccb-gateway:v1 --build-arg pkgName=ccb-gateway --build-arg pkgVersion=1.0 ."
+                steps {
+   				    sh "docker build -t ccb-gateway:v1 --build-arg pkgName=ccb-gateway --build-arg pkgVersion=1.0 ."
+                }
    			}
    		}
    }
