@@ -14,31 +14,12 @@ node {
    stage('编译打包') {
       sh "mvn clean package -Dmaven.test.skip=true"
    }
-   stages {
-        stage('构建镜像') {
-                parallel {
-                    stage('ccb-api1') {
-                        steps {
-                            sh "docker build -t ccb-api1:v1 --build-arg pkgName=ccb-api1 --build-arg pkgVersion=1.0 ."
-                        }
-                    }
-                    stage('ccb-api2') {
-                        steps {
-                            sh "docker build -t ccb-api2:v1 --build-arg pkgName=ccb-api2 --build-arg pkgVersion=1.0 ."
-                        }
-                    }
-                    stage('ccb-portal') {
-                        steps {
-                            sh "docker build -t ccb-portal:v1 --build-arg pkgName=ccb-portal --build-arg pkgVersion=1.0 ."
-                        }
-                    }
-                    stage('ccb-gateway') {
-                        steps {
-                            sh "docker build -t ccb-gateway:v1 --build-arg pkgName=ccb-gateway --build-arg pkgVersion=1.0 ."
-                        }
-                    }
-                }
-        }
+   
+   stage('构建镜像') {
+        sh "docker build -t ccb-api1:v1 --build-arg pkgName=ccb-api1 --build-arg pkgVersion=1.0 ."
+        sh "docker build -t ccb-api2:v1 --build-arg pkgName=ccb-api2 --build-arg pkgVersion=1.0 ."
+        sh "docker build -t ccb-portal:v1 --build-arg pkgName=ccb-portal --build-arg pkgVersion=1.0 ."
+        sh "docker build -t ccb-gateway:v1 --build-arg pkgName=ccb-gateway --build-arg pkgVersion=1.0 ."
    }
    
    stage('推送镜像仓库') {
