@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: ccb-portal
+  profiles:
+    active: k8s
+server:
+  port: 8002

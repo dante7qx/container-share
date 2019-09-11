@@ -1,0 +1,14 @@
+eureka:
+  client:
+    enabled: false 
+ribbon:
+  eureka:
+    enabled: false
+feign:
+  hystrix:
+    enabled: true
+ccb:
+  api1:
+    url: localhost:8000
+  api2:
+    url: localhost:8001

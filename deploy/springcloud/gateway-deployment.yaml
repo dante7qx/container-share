@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: ccb-gateway
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: ccb-gateway
+  template:
+    metadata:
+      labels:
+        app: ccb-gateway
+    spec:
+      containers:
+      - name: ccb-gateway
+        image: ccb-gateway:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: ccb-gateway
+          containerPort: 8080
+        resources:
+          requests:
+            cpu: 128m
+            memory: 256Mi
+          limits:
+#            cpu: 500m
+            memory: 512Mi
+        envFrom:
+        - configMapRef: 
+            name: ccb-springcloud-configmap
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - ccb-gateway
+              topologyKey: kubernetes.io/hostname

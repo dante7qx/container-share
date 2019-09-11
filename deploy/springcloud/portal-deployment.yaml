@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: ccb-portal
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: ccb-portal
+  template:
+    metadata:
+      labels:
+        app: ccb-portal
+    spec:
+      containers:
+      - name: ccb-portal
+        image: ccb-portal:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: ccb-portal
+          containerPort: 8080
+        resources:
+          requests:
+            cpu: 128m
+            memory: 256Mi
+          limits:
+#            cpu: 500m
+            memory: 512Mi
+        envFrom:
+        - configMapRef: 
+            name: ccb-springcloud-configmap
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - ccb-portal
+              topologyKey: kubernetes.io/hostname

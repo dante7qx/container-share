@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: ccb-api1
+  profiles:
+    active: k8s
+server:
+  port: 8000

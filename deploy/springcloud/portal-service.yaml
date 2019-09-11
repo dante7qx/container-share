@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ccb-portal
+spec:
+  selector:
+    app: ccb-portal
+  ports:
+  - name: ccb-portal
+    port: 8080
+    targetPort: 8080

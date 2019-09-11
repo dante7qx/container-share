@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ccb-api2
+spec:
+  selector:
+    app: ccb-api2
+  ports:
+  - name: ccb-api2
+    port: 8080
+    targetPort: 8080

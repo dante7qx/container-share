@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>容器化分享</title>
+<style type="text/css">
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+h1, h2 {
+  margin-top: -20px;
+  margin-bottom: 20px;
+  font-weight: normal;
+}
+</style>
+<link th:href="@{css/el-ui-2.10.0.css}" rel="stylesheet"/>
+<script th:src="@{js/vue-2.6.10.js}" type="text/javascript"></script>
+<script th:src="@{js/axios-0.19.0.min.js}" type="text/javascript"></script>
+<script th:src="@{js/el-ui-2.10.0.js}" type="text/javascript"></script>
+</head>
+<body>
+	<div id="app">
+	    <h1>{{ portalName }}</h1>
+	    <el-row>
+	      <el-col :span="12">
+	      	<h3>{{ api1Name }}</h3>
+		    <el-table
+		      :data="api1Msg"
+		      height="480"
+		      border
+		      style="width: 90%;margin:0 auto">
+			    <el-table-column
+			      type="index" fixed>
+			    </el-table-column>
+			    <el-table-column
+			      prop="name"
+			      label="名称"
+			      width="180">
+			    </el-table-column>
+			    <el-table-column
+			      prop="description"
+			      label="备注">
+			    </el-table-column>
+		    </el-table>
+		  </el-col>
+	      <el-col :span="12">
+	        <h3>{{ api2Name }}</h3>
+		    <el-table
+		      :data="api2Msg"
+		      height="480"
+		      border
+		      style="width: 90%;margin:0 auto">
+			    <el-table-column
+			      type="index" fixed>
+			    </el-table-column>
+			    <el-table-column
+			      prop="name"
+			      label="名称"
+			      width="180">
+			    </el-table-column>
+			    <el-table-column
+			      prop="description"
+			      label="备注">
+			    </el-table-column>
+		    </el-table>
+	      </el-col>
+	   </el-row>
+    </div>
+    <script>
+    	var ctx = window.location.href;
+	    const apiService = axios.create({
+	        baseURL: ctx,
+	        timeout: 3000
+	    });
+    	new Vue({
+    		el: '#app',
+    		data: {
+    			portalName: '',
+    			api1Name: '',
+    			api2Name: '',
+	   	     	api1Msg: [],
+	   	     	api2Msg: [],
+    		},
+    		methods: {
+    		      invokeAPI(url, type) {
+    		    	const that = this
+    		        apiService.get(url)
+    		          .then(function(resp) {
+    		        	  switch (type) {
+    		        		  case 1:
+    		        			  that.portalName = resp.data
+    		        			break;
+    		        		  case 2:
+    		        			  that.api1Name = resp.data
+      		        			break;
+    		        		  case 3:
+    		        			  that.api2Name = resp.data
+      		        			break;
+    		        		  case 4:
+    		        			  that.api1Msg = resp.data
+      		        			break;
+    		        		  case 5:
+    		        			  that.api2Msg = resp.data
+      		        			break;
+    		        	  }
+    		        	  
+    		          })
+    		          .catch(function(error) {
+    		              console.log(error);
+    		          })
+    		      }
+    		  },
+    		  mounted () {
+    			this.invokeAPI('/app_name', 1)
+    			this.invokeAPI('/api1/app_name', 2)
+    			this.invokeAPI('/api2/app_name', 3)
+    			this.invokeAPI('/api1/msg', 4)
+    			this.invokeAPI('/api2/msg', 5)
+    		  }
+    	})
+    </script>
+</body>
+</html>

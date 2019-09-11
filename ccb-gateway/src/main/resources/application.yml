@@ -1,0 +1,31 @@
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.user:dante}:${eureka.pwd:123456}@${eureka.host:localhost}:${eureka.port:8761}/eureka/
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+          route-id-prefix: SPIRIT_
+      routes:
+      - id: ccb-portal
+        uri: lb://CCB-PORTAL
+        predicates:
+        - Path=/**
+      - id: ccb-api1
+        uri: lb://CCB-API1
+        predicates:
+        - Path=/api1/**
+        filters:
+        - StripPrefix=1   
+      - id: ccb-api2
+        uri: lb://CCB-API2
+        predicates:
+        - Path=/api2/**
+        filters:
+        - StripPrefix=1          

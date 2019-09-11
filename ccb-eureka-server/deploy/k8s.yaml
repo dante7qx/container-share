@@ -1,0 +1,130 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: eureka-svc-internal
+  labels:
+    app: eureka-svc-internal
+  namespace: dante
+spec:
+  clusterIP: None
+  ports:
+  - port: 8761
+    name: server
+  selector:
+    app: eureka
+      
+---
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: eureka-pdb
+  namespace: dante
+spec:
+  selector:
+    matchLabels:
+      app: eureka
+  minAvailable: 1
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata: 
+  name: eureka
+  namespace: dante
+spec: 
+  selector: 
+    matchLabels:
+      app: eureka
+  serviceName: eureka-svc-internal
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: eureka
+    spec:
+      terminationGracePeriodSeconds: 10
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 80
+              podAffinityTerm: 
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - eureka
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - name: eureka-cluster
+          image: ccb-springcloud-eureka:v1
+          imagePullPolicy: IfNotPresent
+          ports: 
+            - containerPort: 8761
+              name: server
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 128m
+              memory: 256Mi
+            limits:
+#              cpu: 500m
+              memory: 512Mi
+          env: 
+            - name: MY_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: MY_POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: MY_POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: EUREKA_REPLICAS
+              value: "3"
+            - name: MY_INNER_SERVICE
+              value: eureka-svc-internal
+            - name: EUREKA_APPLICATION_NAME
+              value: eureka
+            - name: EUREKA_USER
+              value: dante
+            - name: EUREKA_PWD
+              value: "123456"
+#          livenessProbe:
+#            httpGet:
+#              path: /actuator/health
+#              port: 8761
+#            initialDelaySeconds: 80
+#            periodSeconds: 10
+#          readinessProbe:
+#            httpGet:
+#              path: /actuator/health
+#              port: 8761
+#            initialDelaySeconds: 80
+#            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eureka-external-server
+  namespace: dante
+  labels:
+    name: eureka-external-server
+spec:
+  ports:
+    - name: http-8761
+      port: 8761
+      protocol: TCP
+      targetPort: 8761
+      nodePort: 30761
+  selector:
+    app: eureka
+  type: NodePort
+              
