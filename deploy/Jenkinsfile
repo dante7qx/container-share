@@ -8,7 +8,7 @@ node {
    }
    
    stage('Sonar静态代码检查') {
-       sh "Sonar 静态代码检查"
+       sh "echo Sonar 静态代码检查"
    }
    
    stage('编译打包') {
