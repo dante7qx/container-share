@@ -4,8 +4,6 @@ metadata:
   name: ccb-k8s-configmap
 data:
   server_port: "8080"
-  spring_profiles_active: springcloud
-  eureka_user: dante
-  eureka_pwd: "123456"
-  eureka_host: eureka-external-server
-  eureka_port: "8761"
+  spring_profiles_active: k8s
+  ccb_api1_url: ccb-api1:8080
+  ccb_api2_url: ccb-api2:8080
