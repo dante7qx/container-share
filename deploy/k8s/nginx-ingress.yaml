@@ -17,11 +17,11 @@ spec:
         backend:
           serviceName: ccb-portal
           servicePort: 8080
-      - path: /api1
+      - path: /b1
         backend:
           serviceName: ccb-api1
           servicePort: 8080
-      - path: /api2
+      - path: /b2
         backend:
           serviceName: ccb-api2
           servicePort: 8080

@@ -19,12 +19,12 @@ spring:
       - id: ccb-api1
         uri: lb://CCB-API1
         predicates:
-        - Path=/api1/**
+        - Path=/b1/**
         filters:
         - StripPrefix=1   
 #      - id: ccb-api2
 #        uri: lb://CCB-API2
 #        predicates:
-#        - Path=/api2/**
+#        - Path=/b2/**
 #        filters:
 #        - StripPrefix=1          
