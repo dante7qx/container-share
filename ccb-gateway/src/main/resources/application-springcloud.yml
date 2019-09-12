@@ -16,15 +16,18 @@ spring:
         uri: lb://CCB-PORTAL
         predicates:
         - Path=/**
+        order: 3
       - id: ccb-api1
         uri: lb://CCB-API1
         predicates:
         - Path=/b1/**
         filters:
-        - StripPrefix=1   
+        - StripPrefix=1 
+        order: 1  
 #      - id: ccb-api2
 #        uri: lb://CCB-API2
 #        predicates:
 #        - Path=/b2/**
 #        filters:
-#        - StripPrefix=1          
+#        - StripPrefix=1 
+#        order: 2           
