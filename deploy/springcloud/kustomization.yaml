@@ -13,8 +13,6 @@ resources:
 - configmap.yaml
 - api1-deployment.yaml
 - api1-service.yaml
-- api2-deployment.yaml
-- api2-service.yaml
 - portal-deployment.yaml
 - portal-service.yaml
 - gateway-deployment.yaml
