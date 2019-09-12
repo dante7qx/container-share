@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ccb-k8s-configmap
+data:
+  server_port: "8080"
+  spring_profiles_active: springcloud
+  eureka_user: dante
+  eureka_pwd: "123456"
+  eureka_host: eureka-external-server
+  eureka_port: "8761"

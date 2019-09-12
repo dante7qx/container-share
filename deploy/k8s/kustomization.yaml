@@ -1,0 +1,21 @@
+namespace: dante
+
+commonLabels: 
+  author: dante
+  business: container-share
+
+commonAnnotations: 
+  dockerVersion: 19.03.1
+  dockerHub: https://hub.docker.com
+  k8sVersion: v1.14.3
+  
+resources:
+- configmap.yaml
+- api1-deployment.yaml
+- api1-service.yaml
+- portal-deployment.yaml
+- portal-service.yaml
+- nginx-secret.yaml
+- nginx-ingress.yaml
+
+

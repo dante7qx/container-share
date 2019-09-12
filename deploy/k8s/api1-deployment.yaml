@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: ccb-api1
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: ccb-api1
+  template:
+    metadata:
+      labels:
+        app: ccb-api1
+    spec:
+      containers:
+      - name: ccb-api1
+        image: ccb-api1:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: ccb-api1
+          containerPort: 8080
+        resources:
+          requests:
+            cpu: 128m
+            memory: 256Mi
+          limits:
+#            cpu: 500m
+            memory: 512Mi
+        envFrom:
+        - configMapRef: 
+            name: ccb-k8s-configmap
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - ccb-api1
+              topologyKey: kubernetes.io/hostname
