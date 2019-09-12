@@ -1,6 +1,6 @@
 ## 1. mvn clean package -Dmaven.test.skip=true
 ## 2. 构建镜像
-## docker build -t ccb-ui:v1 --build-arg pkgName=ccb-ui --build-arg pkgVersion=1.0 .
+## docker build -t ccb-ui:v1 --build-arg pkgName=ccb-ui-1.0 .
 
 FROM dante2012/java:jre8-221
 
@@ -9,9 +9,8 @@ LABEL MAINTAINER="sunchap <sunchao.0129@163.com>"
 ENV JAVA_OPTS="-Xms256m -Xmx512m -XX:MetaspaceSize=64m -XX:MaxMetaspaceSize=128m" 
 
 ARG pkgName 
-ARG pkgVersion
 
-COPY ${pkgName}/target/${pkgName}-${pkgVersion}.jar app.jar
+COPY ${pkgName}.jar app.jar
 
 RUN sh -c 'touch /app.jar'
 

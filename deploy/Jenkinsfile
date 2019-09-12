@@ -16,10 +16,24 @@ node {
    }
    
    stage('构建镜像') {
-        sh "docker build -t ccb-api1:v1 --build-arg pkgName=ccb-api1 --build-arg pkgVersion=1.0 ."
-        sh "docker build -t ccb-api2:v1 --build-arg pkgName=ccb-api2 --build-arg pkgVersion=1.0 ."
-        sh "docker build -t ccb-portal:v1 --build-arg pkgName=ccb-portal --build-arg pkgVersion=1.0 ."
-        sh "docker build -t ccb-gateway:v1 --build-arg pkgName=ccb-gateway --build-arg pkgVersion=1.0 ."
+        sh """
+        cd deploy/
+        cp ../ccb-api1/target/ccb-api1-1.0.jar ./
+        docker build -t ccb-api1:v1 --build-arg pkgName=ccb-api1-1.0 .
+        rm -rf ccb-api1-1.0.jar
+        
+        cp ../ccb-api2/target/ccb-api2-1.0.jar ./
+        docker build -t ccb-api2:v1 --build-arg pkgName=ccb-api2-1.0 .
+        rm -rf ccb-api2-1.0.jar
+        
+        cp ../ccb-portal/target/ccb-portal-1.0.jar ./
+        docker build -t ccb-portal:v1 --build-arg pkgName=ccb-portal-1.0 .
+        rm -rf ccb-portal-1.0.jar
+        
+        cp ../ccb-gateway/target/ccb-gateway-1.0.jar ./
+        docker build -t ccb-gateway:v1 --build-arg pkgName=ccb-gateway-1.0 .
+        rm -rf ccb-gateway-1.0.jar
+        """
    }
    
    stage('推送镜像仓库') {
