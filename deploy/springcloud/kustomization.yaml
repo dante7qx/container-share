@@ -2,7 +2,7 @@ namespace: dante
 
 commonLabels: 
   author: dante
-  business: ccb-competition
+  business: container-share
 
 commonAnnotations: 
   dockerVersion: 19.03.1
