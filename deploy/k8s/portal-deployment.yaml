@@ -28,7 +28,7 @@ spec:
             memory: 512Mi
         envFrom:
         - configMapRef: 
-            name: ccb-springcloud-configmap
+            name: ccb-k8s-configmap
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
