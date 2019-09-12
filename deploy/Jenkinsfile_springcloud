@@ -19,15 +19,15 @@ node {
         sh """
         cd deploy/
         cp ../ccb-api1/target/ccb-api1-1.0.jar ./
-        docker build -t ccb-api1:v1 --build-arg pkgName=ccb-api1-1.0 .
+        docker build -t ccb-api1:sc-v1 --build-arg pkgName=ccb-api1-1.0 .
         rm -rf ccb-api1-1.0.jar
         
         cp ../ccb-portal/target/ccb-portal-1.0.jar ./
-        docker build -t ccb-portal:v1 --build-arg pkgName=ccb-portal-1.0 .
+        docker build -t ccb-portal:sc-v1 --build-arg pkgName=ccb-portal-1.0 .
         rm -rf ccb-portal-1.0.jar
         
         cp ../ccb-gateway/target/ccb-gateway-1.0.jar ./
-        docker build -t ccb-gateway:v1 --build-arg pkgName=ccb-gateway-1.0 .
+        docker build -t ccb-gateway:sc-v1 --build-arg pkgName=ccb-gateway-1.0 .
         rm -rf ccb-gateway-1.0.jar
         """
    }

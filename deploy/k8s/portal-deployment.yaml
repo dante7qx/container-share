@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: ccb-portal
-        image: ccb-portal:v1
+        image: ccb-portal:k8s-v1
         imagePullPolicy: IfNotPresent
         ports:
         - name: ccb-portal

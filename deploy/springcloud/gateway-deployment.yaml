@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: ccb-gateway
-        image: ccb-gateway:v1
+        image: ccb-gateway:sc-v1
         imagePullPolicy: IfNotPresent
         ports:
         - name: ccb-gateway
