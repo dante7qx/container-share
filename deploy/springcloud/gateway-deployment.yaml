@@ -2,7 +2,6 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: ccb-gateway
-  namespace: dante
 spec:
   replicas: 1
   selector: 

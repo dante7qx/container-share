@@ -22,10 +22,6 @@ node {
         docker build -t ccb-api1:v1 --build-arg pkgName=ccb-api1-1.0 .
         rm -rf ccb-api1-1.0.jar
         
-        ## cp ../ccb-api2/target/ccb-api2-1.0.jar ./
-        ## docker build -t ccb-api2:v1 --build-arg pkgName=ccb-api2-1.0 .
-        ## rm -rf ccb-api2-1.0.jar
-        
         cp ../ccb-portal/target/ccb-portal-1.0.jar ./
         docker build -t ccb-portal:v1 --build-arg pkgName=ccb-portal-1.0 .
         rm -rf ccb-portal-1.0.jar
