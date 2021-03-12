@@ -1,6 +1,6 @@
-FROM dante2012/java:jre8-221
+FROM dante2012/java:centos-oraclejre-1.8.0_212
 
-LABEL maintainer="sunchao.zh <sunchao.bj@ccbft.com>"
+LABEL maintainer="sunchao.zh <dante@dante7qx@126.com>"
 
 ENV JAVA_OPTS="-Xms256m -Xmx512m -XX:MetaspaceSize=64m -XX:MaxMetaspaceSize=128m" 
 

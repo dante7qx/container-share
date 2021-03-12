@@ -23,7 +23,7 @@
     ```dockerfile
     FROM centos:7.5.1804
     
-    LABEL maintainer="sunchao.zh <sunchao.bj@ccbft.com>"
+    LABEL maintainer="sunchao.zh <dante@dante7qx@126.com>"
     
     ENV JAVA_HOME /usr/local/java
     ENV PATH $JAVA_HOME/bin:$PATH
@@ -46,7 +46,7 @@
     ```dockerfile
     FROM my-java:jre8
     
-    LABEL maintainer="sunchao.zh <sunchao.bj@ccbft.com>"
+    LABEL maintainer="sunchao.zh <dante@dante7qx@126.com>"
     
     ENV JAVA_OPTS="-Xms512m -Xmx1024m -XX:MetaspaceSize=64m -XX:MaxMetaspaceSize=128m" 
     

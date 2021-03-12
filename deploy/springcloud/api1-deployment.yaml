@@ -1,4 +1,5 @@
-apiVersion: extensions/v1beta1
+#apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ccb-api1
@@ -22,10 +23,10 @@ spec:
         resources:
           requests:
             cpu: 128m
-            memory: 256Mi
-          limits:
-#            cpu: 500m
             memory: 512Mi
+          limits:
+            cpu: 500m
+            memory: 4096Mi
         envFrom:
         - configMapRef: 
             name: ccb-springcloud-configmap
