@@ -23,7 +23,7 @@
     ```dockerfile
     FROM centos:7.5.1804
     
-    LABEL maintainer="sunchao.zh <dante@dante7qx@126.com>"
+    LABEL maintainer="dante <dante@dante7qx@126.com>"
     
     ENV JAVA_HOME /usr/local/java
     ENV PATH $JAVA_HOME/bin:$PATH
